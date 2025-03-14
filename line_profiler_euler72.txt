@@ -1,0 +1,66 @@
+# def fast_phi(n,primes) is the most time consuming function
+
+30397485.0
+Wrote profile results to euler72.py.lprof
+Timer unit: 1e-06 s
+
+Total time: 0.0028515 s
+File: euler72.py
+Function: gen_primes at line 4
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     4                                           @profile
+     5                                           def gen_primes(n):
+     6         1          1.5      1.5      0.1      l = range(2,n)
+     7         1          0.3      0.3      0.0      primes = []
+     8       999        183.8      0.2      6.4      for j in range(0,len(l)):
+     9       998        143.3      0.1      5.0          p = True
+    10      2968        527.7      0.2     18.5          for d in primes:
+    11      2967        800.7      0.3     28.1              if(d > sqrt(l[j])):
+    12       167         25.0      0.1      0.9                  break
+    13      2800        704.3      0.3     24.7              if(l[j] % d == 0):
+    14       830        118.9      0.1      4.2                  p = False
+    15       830        123.2      0.1      4.3                  break;
+    16       998        176.7      0.2      6.2          if(p):
+    17       168         45.3      0.3      1.6              primes.append(l[j])
+    18                                           
+    19         1          0.8      0.8      0.0      return primes
+
+Total time: 0.0871467 s
+File: euler72.py
+Function: factorize at line 21
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    21                                           @profile
+    22                                           def factorize(n,primes):
+    23      9999       1883.8      0.2      2.2      factors = []
+    24      9999       1843.4      0.2      2.1      init_n = n
+    25     96347      18088.3      0.2     20.8      for p in primes:
+    26    118736      25547.0      0.2     29.3          while(n%p == 0):
+    27     22389       4276.3      0.2      4.9              n = n/p
+    28     22389       4171.4      0.2      4.8              factors.append(p)
+    29     96347      22676.1      0.2     26.0          if(p > sqrt(n)):
+    30      9999       1790.3      0.2      2.1              break
+    31      9999       1978.3      0.2      2.3      if(n > 1):
+    32      9596       1930.0      0.2      2.2          factors.append(n)
+    33      9999       2961.8      0.3      3.4      return factors
+
+Total time: 0.20075 s
+File: euler72.py
+Function: fast_phi at line 50
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    50                                           @profile
+    51                                           def fast_phi(n,primes):
+    52      9999     177890.1     17.8     88.6      factors = factorize(n,primes)
+    53      9999       1918.0      0.2      1.0      phi = factors[0]-1
+    54     31985       7833.2      0.2      3.9      for i in range(1,len(factors)):
+    55     21986       4674.0      0.2      2.3          if(factors[i] == factors[i-1]):
+    56      7685       2044.6      0.3      1.0              phi *= (factors[i]-1)*(factors[i])/(factors[i]-1)
+    57                                                   else:
+    58     14301       3381.4      0.2      1.7              phi *= (factors[i]-1)
+    59      9999       3009.2      0.3      1.5      return phi
+

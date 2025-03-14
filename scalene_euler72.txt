@@ -1,0 +1,7 @@
+# 100% of the time was spent by the system in CPU
+#100% system suggests that the Python code execution itself isn't consuming CPU resources directly, 
+#but the OS or external libraries are handling the task.
+# in this case it is mainly the threat.py:
+#50% of the time is spent on self._target(*self._args, **self._kwargs)
+#25% on  del self._target, self._args, self._kwargs
+# and 25% by shutil.py

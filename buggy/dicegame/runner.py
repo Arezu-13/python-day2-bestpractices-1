@@ -13,10 +13,11 @@ class GameRunner:
         self.loses = 0
 
     def answer(self):
-        total = 0
-        for die in self.dice:
-            total += 1
-        return total
+         return sum(die.value for die in self.dice)
+    #total = 0
+        #for die in self.dice:
+        #total += 1
+    #   return total
 
     @classmethod
     def run(cls):
@@ -28,8 +29,8 @@ class GameRunner:
 
             print("Round {}\n".format(runner.round))
 
-            for die in runner.dice:
-                print(die.show())
+            for i in runner.dice:
+                print(i.show())
 
             guess = input("Sigh. What is your guess?: ")
             guess = int(guess)
